@@ -1,0 +1,58 @@
+<div style="text-align: center">
+  <h1>pipe</h1>
+  <p>{{ name }}</p>
+  <p>{{ name | slice : 0 : 9 }}</p>
+  <p>{{ date | date : "fullDate" | uppercase }}</p>
+</div>
+
+<div style="text-align: center">
+  <h1>custom pipe</h1>
+  <p>{{ value | uxpipe : 10 }}</p>
+
+  <ul>
+    <li *ngFor="let name of nameArr">
+      {{ name | uxpipe : 5 }}
+    </li>
+  </ul>
+</div>
+
+<hr />
+<hr />
+<hr />
+<hr />
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="form-group mb-3">
+      
+      <input
+        type="email"
+        class="form-control"
+        id="exampleFormControlInput1"
+        placeholder="Search Product name"
+        [(ngModel)]="namesearch"
+      />
+    </div>
+  </div>
+  <div class="col-md-8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Availabitlity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Product of productArr | filter:namesearch">
+          <th scope="row">{{Product.sno}}</th>
+          <td>{{Product.name}}</td>
+          <td>{{Product.price}} Rs</td>
+          <td>{{Product.availabity}}</td>
+        </tr>
+        
+       
+      </tbody>
+    </table>
+  </div>
+</div>
