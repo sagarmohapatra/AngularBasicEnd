@@ -1,0 +1,89 @@
+<h2 class="text-center">
+  below i have used disable submit button and input color change in validation
+  and user detail give in input
+</h2>
+
+<div class="">
+  <div class="row text-center mt-4 justify-content-center">
+    <div class="col-md-4 mt-2" style="background: #dbdbda; border-radius: 20px">
+      <form class="mt-4 mb-4" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+        <div ngModelGroup="userDetail" #userDetail="ngModelGroup">
+          <div class="mb-3">
+            <div class="justify-content-center mb-3">
+              <h3>Reactive Form</h3>
+            </div>
+
+            <input
+              type="user"
+              class="form-control"
+              placeholder="username*"
+              name="username"
+              [(ngModel)]="userName"
+              required
+            />
+            <small *ngIf="userName">Your UserName is {{ userName }}</small>
+            <button class=" btn btn-primary btn-sm mt-2" (click)="clickuserName()">set username</button>
+          </div>
+          <div class="mb-3">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="email*"
+              name="email"
+              email
+              ngModel
+              #email="ngModel"
+              required
+            />
+            <small class="text-danger" *ngIf="!email.valid && email.touched"
+              >plz enter valid email</small
+            >
+          </div>
+          <span
+            class="text-danger"
+            *ngIf="!userDetail.valid && userDetail.touched"
+            >plz enter detail</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="course" style="margin-left: -19rem">Select Course</label>
+          <select
+            name=""
+            id="course"
+            class="form-control"
+            name="course"
+            [ngModel]="defaultCourse"
+          >
+            <option value="Angular">Angular</option>
+            <option value="Javascript">Javascript</option>
+            <option value="html">html</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="custom-control custom-radio"
+          *ngFor="let gender of genders">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="gender"
+              id="{{gender.id}}"
+              [ngModel]="defaultGender"
+              value="{{gender.value}}"
+            />
+            <label class="form-check-label" for="{{gender.id}}">
+              {{gender.value}}
+            </label>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success mt-3"
+          [disabled]="!myForm.valid"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

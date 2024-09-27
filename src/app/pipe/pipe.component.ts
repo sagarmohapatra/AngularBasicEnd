@@ -20,8 +20,14 @@ export class PipeComponent {
     { sno: 6, name: 'Watch', price: '8000 rs', availabity: 'not Available' },
     { sno: 7, name: 'Dress', price: '15000 rs', availabity: 'not Available' },
     { sno: 8, name: 'Smart fan ', price: '4000 rs', availabity: ' Available' },
-   
-    
   ];
-  namesearch:any=""
+  namesearch: any = '';
+  onAddProduct(add:any) {
+    this.productArr.push({
+      sno: 8,
+      name: add.value,
+      price: '4000 rs',
+      availabity: ' Available',
+    });
+  }
 }

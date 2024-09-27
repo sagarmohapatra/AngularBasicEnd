@@ -1,0 +1,7 @@
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched{    //for border color use this css 
+    // element.style {
+        border: 1px solid red;
+        box-shadow: 0 0 13px inset rgb(255 0 0 / 8%);
+    // }
+}
