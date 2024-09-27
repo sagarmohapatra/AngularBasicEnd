@@ -8,7 +8,7 @@
 <div style="text-align: center">
   <h1>custom pipe</h1>
   <p>{{ value | uxpipe : 10 }}</p>
-
+ 
   <ul>
     <li *ngFor="let name of nameArr">
       {{ name | uxpipe : 5 }}
@@ -21,6 +21,11 @@
 <hr />
 <hr />
 <div class="row justify-content-center">
+  <div class="col-md-8 d-flex mb-2">
+    <input type="text" class="form-control" style="width: 15rem;"
+     placeholder="add product"  #add/>
+    <button class="btn btn-success ml-2" (click)="onAddProduct(add)">Add Product</button>
+  </div>
   <div class="col-md-8">
     <div class="form-group mb-3">
       
