@@ -1,30 +1,39 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TemplateFormComponent } from './template-form/template-form.component';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormControl, FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveComponent } from './reactive/reactive.component';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo:'template',
+    redirectTo:'reactive',
     pathMatch:'full'
   },
-  {
-        path:"template",
-        component:TemplateFormComponent
-      },]
+  // {
+  //       path:"template",
+  //       component:TemplateFormComponent
+  //     },
+    
+      {
+        path:"reactive",
+        component:ReactiveComponent
+      },
+    ]
 
 
 @NgModule({
   declarations: [
-    TemplateFormComponent
+    TemplateFormComponent,
+    ReactiveComponent
     
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class FormModule { }
