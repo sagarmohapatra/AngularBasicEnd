@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,18 +23,56 @@ export class ReactiveComponent {
   userDetail: any;
   ngOnInit() {
     this.myReactiveFrom = new FormGroup({
-      userDetail: new FormGroup({                
-        username: new FormControl(null, [Validators.required,this.NanName.bind(this)]), //FormControl default value
-        email: new FormControl(null, [Validators.required, Validators.email],this.NaEmails),
+      userDetail: new FormGroup({
+        username: new FormControl(null, [
+          Validators.required,
+          this.NanName.bind(this),
+        ]), //FormControl default value
+        email: new FormControl(
+          null,
+          [Validators.required, Validators.email],
+          this.NaEmails
+        ),
       }),
 
       course: new FormControl('Javascript'),
       gender: new FormControl('male'),
       skills: new FormArray([new FormControl(null, Validators.required)]),
     });
+    // this.myReactiveFrom.valueChanges.subscribe((value: any)=>console.log(value))
+    // this.myReactiveFrom.statusChanges.subscribe((status: any)=>console.log(status))
+
+    // setTimeout(() => {
+    //   this.myReactiveFrom.setValue({
+    //     userDetail: {
+    //       username: 'Anup',
+    //       email: 'abc@abc.com',
+    //     },
+    //     course: 'html',
+    //     gender: 'female',
+    //     skills: ['developer'],
+    //   });
+    // },4000);
+
+    setTimeout(() => {
+      this.myReactiveFrom.patchValue({
+        userDetail: {
+          email: 'abc@abc.com',
+        },
+      });
+    }, 4000);
   }
   onSubmit() {
     console.log(this.myReactiveFrom);
+    this.myReactiveFrom.reset({
+      userDetail: {
+        'username': '',
+        'email': '',
+      },
+      'course': 'Angular',
+      'gender': 'female',
+      'skills': [''],
+    });
   }
 
   onAddSkills() {
@@ -36,22 +80,22 @@ export class ReactiveComponent {
       .get('skills')
       .push(new FormControl(null, Validators.required));
   }
-  NanName(control: AbstractControl ) {
+  NanName(control: AbstractControl) {
     if (this.notAllowedNames.indexOf(control.value) !== -1) {
-      return { 'nameIsNotAllow': true };
-    }else{
-      return null
+      return { nameIsNotAllow: true };
+    } else {
+      return null;
     }
   }
 
-  NaEmails(control:AbstractControl):Promise<any>|Observable<any>{
-    const myResponse=new Promise((reslove,reject)=>{
-      setTimeout(()=>{
-        if(control.value==='sagar@gmail.com'){
-          reslove({'emailNotAllow':null})
+  NaEmails(control: AbstractControl): Promise<any> | Observable<any> {
+    const myResponse = new Promise((reslove, reject) => {
+      setTimeout(() => {
+        if (control.value === 'sagar@gmail.com') {
+          reslove({ emailNotAllow: null });
         }
-      },1500)
-    })
-    return myResponse
+      }, 1500);
+    });
+    return myResponse;
   }
 }
